@@ -1,10 +1,15 @@
-#This is a python program to convert
-#english
+#Written by:Soel Sunny
+
+#This is a python program to covert English
+#and numbers to Braillie(grade 1).
+
+#Things to note in braillie
+#⠼ indicate start of numbers.
+#⠰ indicate small letters
+#⠠ indicate capital letters
 
 
-
-
-
+#dictionary for braillie
 grade_1={"a":'⠁',"b":'⠃','c':'⠉','d':'⠙','e':'⠑','f':'⠋','g':'⠛','h':'⠓','i':'⠊','j':'⠚',
          'k':'⠅','l':'⠇','m':'⠍','n':'⠝','o':'⠕','p':'⠏','q':'⠟','r':'⠗','s':'⠎','t':'⠞',
          'u':'⠥','v':'⠧','x':'⠭','y':'⠽','z':'⠵',
@@ -16,20 +21,18 @@ grade_1={"a":'⠁',"b":'⠃','c':'⠉','d':'⠙','e':'⠑','f':'⠋','g':'⠛','
          'W':'⠺',
          'syntax':{',':'⠂',';':'⠆',':':'⠒','.':'⠲','!':'⠖',' ':' ','(':'⠐⠣',')':'⠐⠜','{':'⠸⠣','}':'⠸⠜',"'":"⠄",'<':'⠈⠣','>':'⠈⠜','[':'⠨⠣',']':'⠨⠜','@':'⠈⠁',
                    '$':'⠈⠎','*':'⠐⠔','$':'⠈⠎','=':'⠐⠶','%':'⠨⠴','+':'⠐⠖','-':'⠂⠤','÷':'⠐⠌','×':'⠐⠦','<':'⠈⠣','>':'⠈⠜'}
-         #⠼ numbers
-         #⠰ small
-         #⠠ caps
          }
 
 count=0
-previous_character=[]
-braillie_grade1_list=[]
+previous_character=[] #list for storing previous english charaters entered
+braillie_grade1_list=[] #list for the final braillie charaters
+
 input_text=input("Enter the text:")
 input_text_list=list(input_text)
 
 for character in input_text_list:
     count+=1
-    if character=='0':
+    if character=='0': #checking if entered character is zero
         try:
             if eval(previous_character[-1]):
                 braillie_grade1_list.append("⠚")
@@ -37,8 +40,8 @@ for character in input_text_list:
             braillie_grade1_list.append("⠼"+"⠚")
 
 
-    if character.isupper():
-        if len(previous_character)==0:
+    if character.isupper(): #checking if character is capital
+        if len(previous_character)==0: #checking if it is the first character to be entered
             braillie_grade1_list.append("⠠"+grade_1[character])
         else:
             if previous_character[-1].islower():
@@ -46,7 +49,7 @@ for character in input_text_list:
             elif previous_character[-1].isupper():
                 braillie_grade1_list.append("⠠"+grade_1[character])
 
-            try:
+            try: #checking if the previous character is number
                 if eval(previous_character[-1]):
                     braillie_grade1_list.append("⠠"+grade_1[character])
             except NameError:
@@ -94,7 +97,6 @@ for character in input_text_list:
 
     previous_character.append(input_text_list[count-1])
 
-#print(previous_character)
 print("\nBraillie output in grade 1:")
 for braillie_character in braillie_grade1_list:
     print(braillie_character,end='')
